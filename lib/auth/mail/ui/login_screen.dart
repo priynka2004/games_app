@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:games_app/auth/google/google_login_screen.dart';
+import 'package:games_app/auth/google/google_service.dart';
 import 'package:games_app/auth/mail/login/model/user_model.dart';
 import 'package:games_app/auth/shared/app_colors.dart';
 import 'package:games_app/auth/shared/app_text.dart';
@@ -25,6 +26,27 @@ class _LoginScreenState extends State<LoginScreen> {
   final fromKey = GlobalKey<FormState>();
   final auth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn();
+
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfUserIsSignedIn();
+  }
+
+  Future<void> _checkIfUserIsSignedIn() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      Future.delayed(Duration.zero, () {
+        if (mounted) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            return HomeScreen();
+          }));
+        }
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,28 +123,44 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            InkWell(
-                              onTap: () {
-                                //signInWithGoogle();
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return const GoogleLoginScreen();
-                                }));
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.symmetric(vertical: 12),
-                                decoration: BoxDecoration(
-                                  color: buttonBackground,
-                                  borderRadius: BorderRadius.circular(24),
-                                ),
-                                child: const Text(
-                                  'Login with Google',
-                                  style: TextStyle(color: buttonTextColor),
-                                ),
-                              ),
-                            ),
+                            // const SizedBox(height: 16),
+                            // InkWell(
+                            //
+                            //  // onTap: () async {
+                            //     // await FirebaseService().signInWithGoogle();
+                            //     // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            //     //   return HomeScreen();
+                            //     // }));
+                            //   //},
+                            //
+                            //   onTap: () async {
+                            //     final stopwatch = Stopwatch()..start();
+                            //     bool isSignedIn = await FirebaseService().signInWithGoogle();
+                            //     print("Google Sign-In Duration: ${stopwatch.elapsedMilliseconds} ms");
+                            //
+                            //     if (isSignedIn && mounted) {
+                            //       Future.delayed(Duration.zero, () {
+                            //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                            //           return HomeScreen();
+                            //         }));
+                            //       });
+                            //     }
+                            //   },
+                            //
+                            //   child: Container(
+                            //     width: double.infinity,
+                            //     alignment: Alignment.center,
+                            //     padding: const EdgeInsets.symmetric(vertical: 12),
+                            //     decoration: BoxDecoration(
+                            //       color: buttonBackground,
+                            //       borderRadius: BorderRadius.circular(24),
+                            //     ),
+                            //     child: const Text(
+                            //       'Login with Google',
+                            //       style: TextStyle(color: buttonTextColor),
+                            //     ),
+                            //   ),
+                            // ),
                             const Spacer(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -156,32 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
-
-
-  // signInWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleSignInAccount =
-  //     await googleSignIn.signIn();
-  //     if (googleSignInAccount != null) {
-  //       final GoogleSignInAuthentication googleSignInAuthentication =
-  //       await googleSignInAccount.authentication;
-  //       final AuthCredential authCredential = GoogleAuthProvider.credential(
-  //           accessToken: googleSignInAuthentication.accessToken,
-  //           idToken: googleSignInAuthentication.idToken);
-  //       await auth.signInWithCredential(authCredential);
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e.message);
-  //     throw e;
-  //   }
-  // }
-  // signOut() async {
-  //   await auth.signOut();
-  //   await googleSignIn.signOut();
-  // }
-
 
   void openRegisterUserScreen() {
     Navigator.push(context, MaterialPageRoute(builder: (context) {

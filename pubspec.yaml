@@ -16,6 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
+
 version: 1.0.0+1
 
 environment:
@@ -31,9 +32,9 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
-  firebase_auth: ^5.2.0
+  firebase_auth: ^5.3.1
   firebase_core: ^3.4.0
-  google_sign_in: ^6.2.1
+  google_sign_in: ^6.2.2
   shared_preferences: ^2.3.2
   provider: ^6.1.2
   flutter_chess_board: ^1.0.1
@@ -43,6 +44,8 @@ dependencies:
   intl: ^0.19.0
   lottie: ^3.1.2
   google_mobile_ads: ^2.1.0
+  flutter_native_splash: ^2.4.0
+
 
  #GoGreen
 
@@ -55,8 +58,25 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.1
 
-  # The "flutter_lints" package below contains a set of recommended lints to
+flutter_launcher_icons:
+  flutter_native_splash:
+    color: "#FFFFFF"
+    image: assets/icon/icon.png
+    background_image: assets/icon/icon.png
+    android_gravity: fill
+    android_12:
+      image: assets/icon/icon.png
+      icon_background_color: "#000000"
+      android_gravity: fill
+    web: false
+    android: true
+    ios: false
+
+
+
+  # The "flutter_lints" package below c ontains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
@@ -78,6 +98,7 @@ flutter:
   assets:
       - assets/
       - assets/images/
+      - assets/icon/
       - ./tic.png
       - assets/animations/
 

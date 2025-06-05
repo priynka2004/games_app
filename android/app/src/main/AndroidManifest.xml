@@ -1,15 +1,18 @@
+
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.games_app">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.chroniclesgames.world">
 
     <application
-        android:label="games_app"
+        android:label="Chronicle World"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
         <!-- Correct meta-data for AdMob App ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7350089724411983~3142784683" />
+            android:value="ca-app-pub-6406706306284724~2186242885" />
 
         <activity
             android:name=".MainActivity"
@@ -19,7 +22,8 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="MissingClass">
 
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"

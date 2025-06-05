@@ -44,9 +44,35 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadBannerAd();
   }
 
+  // void _loadBannerAd() {
+  //   _bannerAd = BannerAd(
+  //     //adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+  //     adUnitId: 'ca-app-pub-6406706306284724/4075971250',
+  //     size: AdSize.largeBanner,
+  //     request: const AdRequest(),
+  //     listener: BannerAdListener(
+  //       onAdLoaded: (_) {
+  //         setState(() {
+  //           _isBannerAdLoaded = true;
+  //         });
+  //       },
+  //       onAdFailedToLoad: (ad, error) {
+  //         ad.dispose();
+  //         print('Failed to load a banner ad: ${error.message}');
+  //       },
+  //     ),
+  //   )..load();
+  // }
+
+
+
+  // <meta-data
+  // android:name="com.google.android.gms.ads.APPLICATION_ID"
+  // android:value="ca-app-pub-7350089724411983~3142784683" />
+
   void _loadBannerAd() {
     _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: 'ca-app-pub-6406706306284724/4075971250',
       size: AdSize.largeBanner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -54,10 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             _isBannerAdLoaded = true;
           });
+          print('Banner ad loaded successfully.');
         },
         onAdFailedToLoad: (ad, error) {
           ad.dispose();
-          print('Failed to load a banner ad: ${error.message}');
+          print('Failed to load a banner ad: ${error.code} - ${error.message}');
+          if (error.code == 3) {
+            print('AdMob server did not return an ad due to "No fill".');
+            print('Possible reasons: low inventory, region restrictions, or new Ad Unit.');
+          }
         },
       ),
     )..load();
@@ -76,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          "Game Hub",
+          "Chronicle World",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.transparent,

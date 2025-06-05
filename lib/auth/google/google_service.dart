@@ -16,9 +16,9 @@ class FirebaseService {
             idToken: googleSignInAuthentication.idToken);
 
         await auth.signInWithCredential(authCredential);
-        return true; // Sign-in successful
+        return true;
       }
-      return false; // User cancelled sign-in
+      return false;
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return false;
